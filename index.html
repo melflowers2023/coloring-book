@@ -4,27 +4,27 @@
 <style>
 #main {
 }
-  #sidebar {
+  /* #sidebar {
   float:left;
   width:60px;
   /* var _currentFill = "fill:#000"; */
-}
+
 </style>
 
 <div id="sidebar">
-  <svg id="swatches" width="60px" height="60px"  style="stroke: #000;stroke-width: 2; stroke-opacity: 0.1">
-     <rect id="first" style="fill:#000"    x="0"  y="0" width="40" height="40"/>
+  <svg id="swatches" width="725px" height="150px"  style="stroke: #000;stroke-width: 2; stroke-opacity: 0.1">
+     <rect id="first" style="fill:white"    x="0"  y="0" width="725" height="100"/>
      <!-- <rect style="fill:#f00"    x="0" y="40" width="40" height="40"/>  -->
      <!-- <rect style="fill:#7DBBE6" x="0"  y="80" width="40" height="40"/> 
      <rect style="fill:#C3E4D8" x="0"  y="120" width="40" height="40"/> -->
-     <rect id="selection" style="stroke:#0000ff; stroke-opacity: 1;fill:none" x="0" y="0" width="40" height="40"/>
+     <rect id="selection" style="stroke:#0000ff; stroke-opacity: 1;fill:none" x="0" y="0" width="725" height="100"/>
   </svg>
 </div>
 
 <div id="main">
   <svg id="octocat"xmlns="http://www.w3.org/2000/svg" width="793.70076" height="393.7067066666666" style="fill:#fff;stroke: #000; stroke-opacity: 0.1">
     <title>Sun Flower Template</title>
-    <g id="layer2" transform="translate(114 66)" display="inline">
+    <g id="layer2" transform="translate(70 5)" display="inline">
     <g id="svg_27" transform="matrix(0.849029 0 0 0.849029 65.2874 25.9633)">
         <path id="svg_28" d="m335.662872,237.986206c29.202484,-24.342041 60.58606,-230.559322 9.385345,-295.979031c-73.760437,41.40971 -167.217957,217.611736 -116.882584,287.760891c50.335403,70.149139 107.90538,6.715332 107.497238,8.21814z"/>
         <path id="svg_29" d="m386.044678,310.854431c37.9216,-2.697144 183.860779,-151.734833 180.521729,-234.741455c-84.056488,-9.480042 -262.842316,78.93425 -262.968384,165.273926c-0.126099,86.339691 83.655823,68.486267 82.446655,69.467529z"/>
@@ -54,104 +54,120 @@
 
 </div>
 <div class="slidecontainer">
-  <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+  <input type="range" min="0" max="255" value="255" class="slider" id="redRange" style="accent-color: rgb(255, 0, 0)">
   <p> Red Value: <span id="demor"></span></p>
 </div>
-<!-- <div class="slidecontainer">
-  <input type="range" min="1" max="255" value="0" class="slider" id="myRange">
-  <p>Red Value: <span id="demo"></span></p>
-  Red
-</div> -->
 <div class="slidecontainer">
-  <input type="range" min="1" max="255" value="0" class="slider" id="myRange"> 
-  Green
+  <input type="range" min="0" max="255" value="255" class="slider" id="greenRange" style="accent-color: rgb(0, 255, 0)"> 
+  <p> Green Value: <span id="demog"></span></p>
 </div>
 <div class="slidecontainer">
-  <input type="range" min="1" max="255" value="0" class="slider" id="myRange">
-  Blue
+  <input type="range" min="0" max="255" value="255" class="slider" id="blueRange" style="accent-color: rgb(0, 0, 255)">
+  <p> Blue Value: <span id="demob"></span></p>
+  <style type="text/css" media="screen">
+
+    /* div {
+        margin-bottom: 1em;
+    } */
+
+    .slider {
+        width: 725px;
+        height: 15px;
+        /* min-height:     400px; */
+/* line-height:    400px; */
+    }
+
+</style>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 
-// <script>
-// color swatches
-/*
-      #cat          { fill:   #000; }
-      #pupils       { fill:   #AD5C51; }
-      #mouth       { fill:   #AD5C51; }
-      #face         { fill:   #F4CBB2; }
-      #nose       { fill:   #F00; }
-      #shadow-legs  { fill:   #7DBBE6; }
-      #eyes         { fill:   #FFF; }
-      #puddle     { fill:   #9CDAF1; }
-      #drop       { fill:   #9CDAF1; }
-      #octo       { fill:   #C3E4D8; }
-*/
-var  n_red = 0;
-var n_blue = 0;
-var n_green = 0;
+<script>
+
+var  n_red = 255;
+var n_blue = 255;
+var n_green = 255;
 var _currentColor = 000;
-_currentFill = "fill:" + _currentColor;
+var _currentFill = "fill:#white";
   var _currentMel = "fill:#" + _currentColor;
   "fill:" + _currentColor;
     $("#octocat").click(function (event) { $(event.target).attr('style', _currentFill); })
     var $swatches = $("#swatches");
     $swatches.click(function (event) { 
       $swatch = $(event.target);
-      // $(event.target).attr('style', _currentFill);
       loc = [parseInt($swatch.attr('x'), 10), parseInt($swatch.attr('y'), 10)]
       $("#selection", $swatches).attr('x', loc[0]);
       $("#selection", $swatches).attr('y', loc[1]);
-      // _currentFill = "fill:#000";
-      // _currentColor = rgb(255, 99, 71);
       _currentColor = "rgb(" + n_red + "," + n_green + "," + n_blue + ")";
       _currentFill = "fill:" + _currentColor;
-      console.log($swatch.attr('style')); 
-      console.log(_currentFill);
       
-      if ($swatch.attr('style') == "fill:#f00") {
-        n_red += 20;
-        // $("#first", $swatches).attr('x', loc[0]);
-        // $("#first", $("#swatches")).attr('style', "fill:red");
-        // $swatch.attr('style') = "fill:#7DBBE6";
-      }
-      if ($swatch.attr('style') == "fill:#7DBBE6") {
-        n_blue += 20;
-      }
-      if ($swatch.attr('style') == "fill:#C3E4D8") {
-        n_green += 20;
-      }
-      console.log(n_red + 1);
-      // _currentFill = $swatch.attr('style'); ; 
+      // if ($swatch.attr('style') == "fill:#f00") {
+      //   n_red += 20;
+      // }
+      // if ($swatch.attr('style') == "fill:#7DBBE6") {
+      //   n_blue += 20;
+      // }
+      // if ($swatch.attr('style') == "fill:#C3E4D8") {
+      //   n_green += 20;
+      // }
     })
-    // var slider = document.getElementById("myRange");
-    // var output = output = document.getElementById("demo");
-    // output.innerHTML = slider.value;
-    // slider.onimput = function () {
-    //   output.innerHTML = this.value;
-    // }
+   
 </script>
 <script>
-  var slider = document.getElementById("myRange");
+  var slider = document.getElementById("redRange");
   var output = document.getElementById("demor");
-  output.innerHTML = slider.value;
+  document.getElementById("demor").innerHTML = document.getElementById("redRange").value;
+  document.getElementById("demog").innerHTML = document.getElementById("greenRange").value;
+  document.getElementById("demob").innerHTML = document.getElementById("blueRange").value;
   
-  slider.oninput = function() {
+  document.getElementById("redRange").oninput = function() {
     document.getElementById("demor").innerHTML = this.value;
     n_red = this.value;
     _currentColor = "rgb(" + n_red + "," + n_green + "," + n_blue + ")";
-      _currentFill = "fill:" + _currentColor;
+    _currentFill = "fill:" + _currentColor;
     $("#first", $("#swatches")).attr('style', _currentFill );
+    $("#redRange").attr('style', "accent-color: rgb(" + n_red + ", 0, 0)");
   }
-//   </script>
+  document.getElementById("greenRange").oninput = function() {
+    document.getElementById("demog").innerHTML = this.value;
+    n_green = this.value;
+    _currentColor = "rgb(" + n_red + "," + n_green + "," + n_blue + ")";
+    _currentFill = "fill:" + _currentColor;
+    $("#first", $("#swatches")).attr('style', _currentFill );
+    $("#greenRange").attr('style', "accent-color: rgb(0, " + n_green + ", 0)");
 
-<!-- <rect style="fill:#f00"    x="0"  y="0" width="40" height="40"/> -->
+  }
+  document.getElementById("blueRange").oninput = function() {
+    document.getElementById("demob").innerHTML = this.value;
+    n_blue = this.value;
+    _currentColor = "rgb(" + n_red + "," + n_green + "," + n_blue + ")";
+    _currentFill = "fill:" + _currentColor;
+    $("#first", $("#swatches")).attr('style', _currentFill );
+    $("#blueRange").attr('style', "accent-color: rgb(0, 0," + n_blue + ")");
+  }
+  // change: (args: SliderChangeEventArgs) => {
+  //       if (args.value > 0 && args.value <= 25) {
+  //           // Change handle and range bar color to green when
+  //           (sliderHandle as HTMLElement).style.backgroundColor = 'green';
+  //           (sliderTrack as HTMLElement).style.backgroundColor = 'green';
+  //       } else if (args.value > 25 && args.value <= 50) {
+  //           // Change handle and range bar color to royal blue
+  //           (sliderHandle as HTMLElement).style.backgroundColor = 'royalblue';
+  //           (sliderTrack as HTMLElement).style.backgroundColor = 'royalblue';
+  //       } else if (args.value > 50 && args.value <= 75) {
+  //           // Change handle and range bar color to dark orange
+  //           (sliderHandle as HTMLElement).style.backgroundColor = 'darkorange';
+  //           (sliderTrack as HTMLElement).style.backgroundColor = 'darkorange';
+  //       } else if (args.value > 75 && args.value <= 100) {
+  //           // Change handle and range bar color to red
+  //           (sliderHandle as HTMLElement).style.backgroundColor = 'red';
+  //           (sliderTrack as HTMLElement).style.backgroundColor = 'red';
+  //       }
+  //   }
+ </script>
+
+
 
 </body>
 
-<!-- <svg id="swatches" width="60px" height="200px" viewBox="-4 -4 60 200" style="stroke: #000;stroke-width: 2; stroke-opacity: 0.1">
-  <rect style= _currentColor;   x="40"  y="0" width="40" height="40"/> -->
-  
-
-  <!-- <rect id="selection" style="stroke:#0000ff; stroke-opacity: 1;fill:none" x="0" y="0" width="40" height="40"/> -->
 </svg> 
 </html>
